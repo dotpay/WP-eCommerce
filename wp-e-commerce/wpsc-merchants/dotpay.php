@@ -95,12 +95,11 @@ function currencyValidation($currency) {
  * @param array $data
  * @return string
  */
-function getValidation($data) {
-    $operation_status_completed = 'completed';
-    $operation_status_rejected = 'rejected';
+function getErrorMessage($data) {
+
 
     if(!isset($data['control'])){
-        return false;    //exit if this method is invoked in not suitable point
+        return 'data controll doesnt recieve';
     }
     $total_price = getPrice($data['control']);
 
@@ -129,17 +128,18 @@ function getValidation($data) {
 
 
     if ($_SERVER['REMOTE_ADDR'] <> '195.150.9.37' && !get_option('dotpay_test_mode')) {
-        return 'FAIL';
+        return 'Wrong address';
     }
 
-    if (hash('sha256', $string) === $data['signature']
-        && (float) $data['operation_original_amount'] === (float) $total_price
-        && ( $data['operation_status'] === $operation_status_completed
-            || $data['operation_status'] === $operation_status_rejected ) ) {
-        return 'OK';
-    } else {
-        return 'FAIL';
+    if (hash('sha256', $string) != $data['signature']){
+        return 'Wrong signature';
     }
+
+    if((float) $data['operation_original_amount'] != (float) $total_price){
+        return 'Wrong amount';
+    }
+
+    return false;
 }
 
 /**
@@ -352,22 +352,43 @@ function dotpay_submit() {
 function dotpay_callback() {
     global $wpsc_gateways;
 
-    $data = $_POST;
-    $status = getValidation($data);
+    $error = getErrorMessage($_POST);
 
-    if ($status=='OK' && isset($data['control'])) {
+    if ($error){
+        $wpsc_gateways['dotpay']['dotpay_callback_status'] = $error;
+        return false;
+    }
+
+    $status = $_POST['operation_status'];
+
+    if ($status=='completed' && isset($_POST['control'])) {
 
         $order = array(
             'processed'  => 2,
-            'sessionid'  => $data['control'],
+            'sessionid'  => $_POST['control'],
             'date'       => time(),
         );
 
-        wpsc_update_purchase_log_details( $data['control'], $order, 'sessionid' );
-        transaction_results($data['control'], false);
+        wpsc_update_purchase_log_details( $_POST['control'], $order, 'sessionid' );
+        transaction_results($_POST['control'], false);
 
-        $wpsc_gateways['dotpay']['dotpay_callback_status'] = $status;
     }
+
+    if ($status=='rejected' && isset($_POST['control'])) {
+
+        $order = array(
+            'processed'  => 6,
+            'sessionid'  => $_POST['control'],
+            'date'       => time(),
+        );
+
+        wpsc_update_purchase_log_details( $_POST['control'], $order, 'sessionid' );
+        transaction_results($_POST['control'], false);
+
+    }
+
+    $wpsc_gateways['dotpay']['dotpay_callback_status'] = 'OK';
+
 }
 
 /**
@@ -375,7 +396,7 @@ function dotpay_callback() {
  */
 function dotpay_results() {
 
-    $statusPost = isset($_POST['status']) ? $_POST['stauts']: null;
+    $statusPost = isset($_POST['status']) ? $_POST['status']: null;
     $statusGet = isset($_GET['status']) ? $_GET['status'] : null;
 
     if( $statusPost or $statusGet ) {

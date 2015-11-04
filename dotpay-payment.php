@@ -86,12 +86,13 @@ function dotpay_flush_rewrite_rules() {
  */
 function dotpay_callback_status() {
     global $wp, $wpsc_gateways;
+    if(isset($wp->query_vars["page_id"])){
+        if( (int) $wp->query_vars["page_id"] == get_option('dotpay_callback_page_id')) {
 
-    if( (int) $wp->query_vars["page_id"] == get_option('dotpay_callback_page_id')) {
+            echo $wpsc_gateways['dotpay']['dotpay_callback_status'];
 
-        echo $wpsc_gateways['dotpay']['dotpay_callback_status'];
-
-        die();
+            die();
+        }
     }
 }
 
