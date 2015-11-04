@@ -98,7 +98,12 @@ function currencyValidation($currency) {
 function getValidation($data) {
     $operation_status_completed = 'completed';
     $operation_status_rejected = 'rejected';
+
+    if(!isset($data['control'])){
+        return false;    //exit if this method is invoked in not suitable point
+    }
     $total_price = getPrice($data['control']);
+
 
     $string = get_option('dotpay_pid') .
         (isset($data['id']) ? $data['id'] : '') .
