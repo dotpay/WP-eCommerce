@@ -370,9 +370,10 @@ function dotpay_callback() {
  */
 function dotpay_results() {
 
-    $data = $_POST;
+    $statusPost = isset($_POST['status']) ? $_POST['stauts']: null;
+    $statusGet = isset($_GET['status']) ? $_GET['status'] : null;
 
-    if( $data['status']=='OK' or $_GET['status']=='OK' ) {
+    if( $statusPost or $statusGet ) {
         $_GET['sessionid'] = wpsc_get_customer_meta('checkout_session_id');
     }
 }
