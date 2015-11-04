@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: dotpay\n"
+"POT-Creation-Date: 2015-08-28 13:19+0100\n"
+"PO-Revision-Date: 2015-08-28 13:19+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../dotpay.php:6 ../dotpay.php:8
+msgid "Dotpay Payment"
+msgstr "Płatność Dotpay"
+
+#: ../dotpay.php:200
+msgid "Order:"
+msgstr "Zamówienie nr."
+
+#: ../dotpay.php:270
+msgid "User ID"
+msgstr "Id użytkownika"
+
+#: ../dotpay.php:274
+msgid "User Token"
+msgstr "Token użytkownika"
+
+#: ../dotpay.php:278
+msgid "Mode"
+msgstr "Tryb"
+
+#: ../dotpay.php:280
+msgid "Sandbox (For testing)"
+msgstr "Środowisko testowe"
+
+#: ../dotpay.php:281
+msgid "Production"
+msgstr "Środowisko produkcyjne"
+
+#: ../dotpay.php:286
+msgid "Select Currency:"
+msgstr "Wybierz walute:"
+
+#: ../dotpay-payment.php:103
+msgid "Dotpay Callback"
+msgstr "Odpowiedź z Dotpay"
+
+#~ msgid "Zamówienie nr."
+#~ msgstr "Zamówienie nr."
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Language"
+#~ msgstr "Język"
+
+#~ msgid "Channel"
+#~ msgstr "Kanał płatności"
+
+#~ msgid "Dotpay client email"
+#~ msgstr "Email użytkownika Dotpay"
+
+#~ msgid "Return URL"
+#~ msgstr "Adres URL powrotny"
+
+#~ msgid "Notify URL"
+#~ msgstr "Adres URL dla potwierdzeń"
