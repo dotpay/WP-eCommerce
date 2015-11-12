@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Dotpay Payment for WP eCommerce
-Version: 1.0
+Version: 1.2
 Description: Payment gateway for Wp eCommerce payments.
 Text Domain: dotpay
  */

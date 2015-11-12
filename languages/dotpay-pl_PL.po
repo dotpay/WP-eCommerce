@@ -2,16 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dotpay\n"
 "POT-Creation-Date: 2015-08-28 13:19+0100\n"
-"PO-Revision-Date: 2015-08-28 13:19+0100\n"
+"PO-Revision-Date: 2015-11-09 15:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.2\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Language: pl_PL\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../dotpay.php:6 ../dotpay.php:8
@@ -24,11 +25,11 @@ msgstr "Zamówienie nr."
 
 #: ../dotpay.php:270
 msgid "User ID"
-msgstr "Id użytkownika"
+msgstr "ID użytkownika"
 
 #: ../dotpay.php:274
-msgid "User Token"
-msgstr "Token użytkownika"
+msgid "User PIN"
+msgstr "PIN użytkownika"
 
 #: ../dotpay.php:278
 msgid "Mode"
@@ -36,15 +37,27 @@ msgstr "Tryb"
 
 #: ../dotpay.php:280
 msgid "Sandbox (For testing)"
-msgstr "Środowisko testowe"
+msgstr "Konto testowe"
 
 #: ../dotpay.php:281
 msgid "Production"
-msgstr "Środowisko produkcyjne"
+msgstr "Konto produkcyjne"
+
+#: ../dotpay.php:282
+msgid "Register your new account in dotpay.pl"
+msgstr "Zarejestruj nowe konto w Dotpay"
+
+#: ../dotpay.php:282
+msgid "ID is a 6 digits number"
+msgstr "ID to 6 cyfrowy numer, który odczytasz z panelu Dotpay"
 
 #: ../dotpay.php:286
 msgid "Select Currency:"
 msgstr "Wybierz walute:"
+
+#: ../dotpay.php:286
+msgid "PIN must contains min. 16 and max 32 characters (read this from the panel Dotpay)"
+msgstr "PIN odczytasz z panelu Dotpay (min. 16 a maks. 32 znaki)"
 
 #: ../dotpay-payment.php:103
 msgid "Dotpay Callback"

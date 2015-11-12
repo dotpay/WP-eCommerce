@@ -153,7 +153,7 @@ function dotpay_gateway($separator, $sessionid) {
 
     $actions = array(
         'sandbox'   => 'https://ssl.dotpay.pl/test_payment/',
-        'develop'   => 'https://ssl.dotpay.pl/'
+        'develop'   => 'https://ssl.dotpay.pl/t2/'
     );
 
     $purchase_log = $wpdb->get_row("SELECT * FROM `".WPSC_TABLE_PURCHASE_LOGS."` WHERE `sessionid`= ".$sessionid." LIMIT 1",ARRAY_A);
@@ -275,15 +275,19 @@ function dotpay_gateway($separator, $sessionid) {
 function form_dotpay_payment() {
 
     $test_mode = get_option('dotpay_test_mode',1);
-
+	$rejestruj = "<a href=\"https://ssl.dotpay.pl/s2/login/registration/?affilate_id=wpecommerce\" target=\"_blank\" class=\"button button-primary\" title=\"". __('Register your new account in dotpay.pl','dotpay') . "\">". __('Register your new account in dotpay.pl','dotpay') . "</a>";			
+		
     $output = "
+	<tr><td><a href=\"http://dotpay.pl/\" target=\"_blank\" title=\"dotpay.pl\"><img src='".WPSC_URL . "/images/dotpay.png'></a></td>
+	<td>".$rejestruj."</td>
+	</tr>
     <tr>
         <td>" . __('User ID','dotpay') . "</td>
-        <td><input type=\"text\" size=\"40\" value=\"" . get_option('dotpay_accountId'). "\" name=\"dotpay_accountId\" /></td>
+        <td><input type=\"text\" size=\"40\" value=\"" . get_option('dotpay_accountId'). "\" name=\"dotpay_accountId\"  maxlength=\"6\" pattern=\"[0-9]{6}\" /><p class=\"description\">". __('ID is a 6 digits number','dotpay') . "</p></td>
     </tr>
     <tr>
-        <td>" . __('User Token','dotpay') . "</td>
-        <td><input type=\"text\" size=\"40\" value=\"" . get_option('dotpay_pid'). "\" name=\"dotpay_pid\" /></td>
+        <td>" . __('User PIN','dotpay') . "</td>
+        <td><input type=\"text\" size=\"40\" value=\"" . get_option('dotpay_pid'). "\" name=\"dotpay_pid\" pattern=\"[0-9A-Za-z]{16,32}\" maxlength=\"32\"/><p class=\"description\">". __('PIN must contains min. 16 and max 32 characters (read this from the panel Dotpay)','dotpay') . "</p></td>
     </tr>
     <tr>
         <td>" . __('Mode','dotpay') . "</td>
@@ -361,10 +365,23 @@ function dotpay_callback() {
 
     $status = $_POST['operation_status'];
 
-    if ($status=='completed' && isset($_POST['control'])) {
+    if ($status=='new' && isset($_POST['control'])) {
 
         $order = array(
             'processed'  => 2,
+            'sessionid'  => $_POST['control'],
+            'date'       => time(),
+        );
+
+        wpsc_update_purchase_log_details( $_POST['control'], $order, 'sessionid' );
+        transaction_results($_POST['control'], false);
+
+    }
+
+    if ($status=='completed' && isset($_POST['control'])) {
+
+        $order = array(
+            'processed'  => 3,
             'sessionid'  => $_POST['control'],
             'date'       => time(),
         );
