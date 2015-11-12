@@ -5,7 +5,7 @@ WP eCommerce Dotpay payment module
 
 ####Wtyczka dla WordPress dodająca bramkę płatności Dotpay####
 
-#Wymagania#
+###Wymagania:###
 - system WordPress,
 - plugin WP e-Commerce,
 - konto w Dotpay 2.0.
@@ -22,7 +22,7 @@ Moduł przetestowany został z wersjami WordPress 4.2.4 oraz WP-e-Commerce 3.9.5
 
 ####WordPress plugin adding Dotpay payment gateway####
 
-# Requirements: #
+###Requirements:###
 - WordPress system,
 - WP e-Commerce plugin,
 - Dotpay 2.0 account.
